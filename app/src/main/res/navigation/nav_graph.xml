@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/positions_screen">
+
+    <fragment
+        android:id="@+id/positions_screen"
+        android:name="ru.ventra.github.jobs.ui.position.PositionsFragment"
+        android:label="@string/positions_fragment_label"
+        tools:layout="@layout/positions_fragment">
+
+<!--        <action-->
+<!--            android:id="@+id/action_positions_to_detail"-->
+<!--            app:destination="@id/position_detail_screen" />-->
+
+    </fragment>
+
+<!--    <fragment-->
+<!--        android:id="@+id/position_detail_screen"-->
+<!--        android:name="ru.ventra.github.jobs.ui.position.detail.PositionDetailFragment"-->
+<!--        android:label="@string/position_detail_fragment_label"-->
+<!--        tools:layout="@layout/position_detail_fragment">-->
+
+<!--        <argument-->
+<!--            android:name="position_id"-->
+<!--            android:defaultValue="@null"-->
+<!--            app:argType="string" />-->
+
+<!--    </fragment>-->
+
+</navigation>

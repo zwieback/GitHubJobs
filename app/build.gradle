@@ -74,6 +74,7 @@ dependencies {
     implementation deps.recyclerview
     implementation deps.material
     implementation deps.multidex
+    implementation deps.cardview
     implementation deps.constraint_layout
     // Navigation
     implementation deps.navigation.fragment_ktx

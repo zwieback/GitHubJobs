@@ -23,6 +23,7 @@ ext.versions = [
         recyclerview                      : '1.1.0',
         activity                          : '1.1.0',
         fragment                          : '1.2.4',
+        cardview                          : '1.0.0',
         constraint_layout                 : '2.0.0-beta4',
         multidex                          : '2.0.1',
         // Architecture Components
@@ -77,6 +78,7 @@ deps.fragment = [
         testing    : "androidx.fragment:fragment-testing:$versions.fragment",
 ]
 deps.multidex = "androidx.multidex:multidex:$versions.multidex"
+deps.cardview = "androidx.cardview:cardview:$versions.cardview"
 deps.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
 deps.material = "com.google.android.material:material:$versions.material"
 

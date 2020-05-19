@@ -1,39 +1,112 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
-
+    compileSdkVersion build_versions.compile_sdk
+    buildToolsVersion build_versions.build_tools
     defaultConfig {
         applicationId "ru.ventra.github.jobs"
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
+        multiDexEnabled true
 
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+        // used by Room, to test migrations
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-DEBUG"
+            minifyEnabled false
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    sourceSets {
+        // used by Room, to test migrations
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    // Kotlin
+    implementation deps.kotlin.stdlib
+    // Coroutines
+    implementation deps.kotlin.coroutines.core
+    implementation deps.kotlin.coroutines.android
+    implementation(deps.kotlin.coroutines.test)
+    // Support
+    implementation deps.core_ktx
+    implementation deps.appcompat
+    implementation deps.activity_ktx
+    implementation deps.fragment.runtime
+    implementation(deps.fragment.testing)
+    implementation deps.recyclerview
+    implementation deps.material
+    implementation deps.multidex
+    implementation deps.constraint_layout
+    // Navigation
+    implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.ui_ktx
+    implementation(deps.navigation.testing)
+    // Lifecycle
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.java8
+    implementation deps.lifecycle.viewmodel_ktx
+    implementation deps.lifecycle.livedata_ktx
+    // Room
+    implementation deps.room.ktx
+    implementation deps.room.runtime
+    kapt deps.room.compiler
+    implementation(deps.room.testing)
+    // Adapter
+    implementation deps.adapter
+    // DI
+    implementation deps.koin.fragment
+    implementation deps.koin.scope
+    implementation deps.koin.viewmodel
+    implementation deps.koin.ext
+    implementation(deps.koin.test)
+    // Network
+    implementation deps.retrofit.core
+    implementation deps.retrofit.converter_gson
+    // Debug
+    implementation deps.timber
+    // Unit tests
+    testImplementation deps.test.junit
+    testImplementation deps.test.mockito.core
+    testImplementation deps.test.mockito.inline
+    testImplementation deps.test.mockito.kotlin
+    testImplementation deps.arch_core.testing
+    // Espresso and UI Testing
+    androidTestImplementation deps.test.ext_junit
+    androidTestImplementation deps.test.runner
+    androidTestImplementation deps.test.espresso.core
+    androidTestImplementation deps.arch_core.testing
 }

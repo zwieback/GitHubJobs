@@ -17,19 +17,38 @@ class PositionsViewModel : BaseViewModel<PositionsUiState>() {
     fun loadPositions() {
         uiState.value = PositionsUiState.Loading
         viewModelScope.launch {
-            try {
-                val positions = withContext(Dispatchers.IO) {
-                    networkRepository.getAllPositions()
-                }
-                if (positions.isNotEmpty()) {
-                    localRepository.savePositions(positions)
-                    uiState.value = PositionsUiState.Success(positions)
-                } else {
-                    uiState.value = PositionsUiState.Error("No jobs found")
-                }
-            } catch (e: Exception) {
-                uiState.value = PositionsUiState.Error("Failed to get data from the network")
+            if (!loadFromLocalCache()) {
+                loadFromNetwork()
             }
+        }
+    }
+
+    private suspend fun loadFromLocalCache(): Boolean {
+        try {
+            val positions = localRepository.getAllPositions()
+            if (positions.isNotEmpty()) {
+                uiState.value = PositionsUiState.Success(positions)
+            }
+        } catch (e: Exception) {
+            uiState.value = PositionsUiState.Error("Failed to get data from the network")
+            return false
+        }
+        return true
+    }
+
+    private suspend fun loadFromNetwork() {
+        try {
+            val positions = withContext(Dispatchers.IO) {
+                networkRepository.getAllPositions()
+            }
+            if (positions.isNotEmpty()) {
+                localRepository.savePositions(positions)
+                uiState.value = PositionsUiState.Success(positions)
+            } else {
+                uiState.value = PositionsUiState.Error("No jobs found")
+            }
+        } catch (e: Exception) {
+            uiState.value = PositionsUiState.Error("Failed to get data from the network")
         }
     }
 }

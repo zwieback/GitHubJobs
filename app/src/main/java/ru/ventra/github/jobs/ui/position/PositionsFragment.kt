@@ -11,7 +11,6 @@ import ru.ventra.github.jobs.extensions.gone
 import ru.ventra.github.jobs.extensions.toast
 import ru.ventra.github.jobs.extensions.viewLifecycleLazy
 import ru.ventra.github.jobs.extensions.visible
-import ru.ventra.github.jobs.ui.main.PositionsViewModel
 
 class PositionsFragment : Fragment(R.layout.positions_fragment) {
 

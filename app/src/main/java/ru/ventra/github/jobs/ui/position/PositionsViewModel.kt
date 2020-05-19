@@ -1,4 +1,4 @@
-package ru.ventra.github.jobs.ui.main
+package ru.ventra.github.jobs.ui.position
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -8,7 +8,6 @@ import org.koin.java.KoinJavaComponent.inject
 import ru.ventra.github.jobs.network.repository.PositionNetworkRepository
 import ru.ventra.github.jobs.persistence.repository.PositionLocalRepository
 import ru.ventra.github.jobs.ui.base.BaseViewModel
-import ru.ventra.github.jobs.ui.position.PositionsUiState
 
 class PositionsViewModel : BaseViewModel<PositionsUiState>() {
 

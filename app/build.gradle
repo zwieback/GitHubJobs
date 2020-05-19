@@ -98,6 +98,9 @@ dependencies {
     implementation deps.koin.viewmodel
     implementation deps.koin.ext
     implementation(deps.koin.test)
+    // Room
+    implementation deps.glide.runtime
+    kapt deps.glide.compiler
     // Network
     implementation deps.retrofit.core
     implementation deps.retrofit.converter_gson

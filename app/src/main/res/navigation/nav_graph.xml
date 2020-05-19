@@ -11,23 +11,22 @@
         android:label="@string/positions_fragment_label"
         tools:layout="@layout/positions_fragment">
 
-<!--        <action-->
-<!--            android:id="@+id/action_positions_to_detail"-->
-<!--            app:destination="@id/position_detail_screen" />-->
+        <action
+            android:id="@+id/action_positions_to_detail"
+            app:destination="@id/position_detail_screen" />
 
     </fragment>
 
-<!--    <fragment-->
-<!--        android:id="@+id/position_detail_screen"-->
-<!--        android:name="ru.ventra.github.jobs.ui.position.detail.PositionDetailFragment"-->
-<!--        android:label="@string/position_detail_fragment_label"-->
-<!--        tools:layout="@layout/position_detail_fragment">-->
+    <fragment
+        android:id="@+id/position_detail_screen"
+        android:name="ru.ventra.github.jobs.ui.position.detail.PositionDetailFragment"
+        android:label="@string/position_detail_fragment_label"
+        tools:layout="@layout/position_detail_fragment">
 
-<!--        <argument-->
-<!--            android:name="position_id"-->
-<!--            android:defaultValue="@null"-->
-<!--            app:argType="string" />-->
+        <argument
+            android:name="position_id"
+            app:argType="string" />
 
-<!--    </fragment>-->
+    </fragment>
 
 </navigation>

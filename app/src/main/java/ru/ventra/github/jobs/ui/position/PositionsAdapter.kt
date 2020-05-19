@@ -7,7 +7,7 @@ import ru.ventra.github.jobs.R
 import ru.ventra.github.jobs.databinding.PositionsItemBinding
 import ru.ventra.github.jobs.persistence.entity.Position
 
-class PositionsAdapter : BaseAdapter() {
+class PositionsAdapter(private val clickListener: OnPositionClickListener) : BaseAdapter() {
 
     init {
         addSection(arrayListOf<Position>())
@@ -26,7 +26,8 @@ class PositionsAdapter : BaseAdapter() {
     override fun viewHolder(layout: Int, view: View): PositionsViewHolder {
         return PositionsViewHolder(
             view,
-            PositionsItemBinding.bind(view)
+            PositionsItemBinding.bind(view),
+            clickListener
         )
     }
 }

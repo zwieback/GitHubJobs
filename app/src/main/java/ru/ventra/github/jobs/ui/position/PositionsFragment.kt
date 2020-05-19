@@ -2,8 +2,8 @@ package ru.ventra.github.jobs.ui.position
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.ventra.github.jobs.R
 import ru.ventra.github.jobs.databinding.PositionsFragmentBinding
@@ -11,12 +11,14 @@ import ru.ventra.github.jobs.extensions.gone
 import ru.ventra.github.jobs.extensions.toast
 import ru.ventra.github.jobs.extensions.viewLifecycleLazy
 import ru.ventra.github.jobs.extensions.visible
+import ru.ventra.github.jobs.persistence.entity.Position
+import ru.ventra.github.jobs.ui.base.BaseFragment
 
-class PositionsFragment : Fragment(R.layout.positions_fragment) {
+class PositionsFragment : BaseFragment(R.layout.positions_fragment), OnPositionClickListener {
 
     private val binding by viewLifecycleLazy { PositionsFragmentBinding.bind(requireView()) }
     private val vm: PositionsViewModel by viewModel()
-    private val adapter by lazy { PositionsAdapter() }
+    private val adapter by lazy { PositionsAdapter(this) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,6 +27,11 @@ class PositionsFragment : Fragment(R.layout.positions_fragment) {
         })
         binding.recyclerView.adapter = adapter
         vm.loadPositions()
+    }
+
+    override fun onPositionClick(position: Position) {
+        val directions = PositionsFragmentDirections.actionPositionsToDetail(position.id)
+        findNavController().navigate(directions)
     }
 
     private fun render(uiState: PositionsUiState) {
@@ -41,6 +48,7 @@ class PositionsFragment : Fragment(R.layout.positions_fragment) {
     }
 
     private fun onSuccess(uiState: PositionsUiState.Success) = with(binding) {
+        eventListener?.onChangeToolbarTitle(getString(R.string.app_name))
         adapter.replacePositions(uiState.positions)
         progressBar.gone()
         recyclerView.visible()

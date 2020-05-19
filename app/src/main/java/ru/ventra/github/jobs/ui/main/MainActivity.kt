@@ -5,8 +5,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import ru.ventra.github.jobs.databinding.MainActivityBinding
 import ru.ventra.github.jobs.extensions.viewBinding
+import ru.ventra.github.jobs.ui.base.OnFragmentEventListener
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnFragmentEventListener {
 
     private val binding by viewBinding(MainActivityBinding::inflate)
 
@@ -25,6 +26,10 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onChangeToolbarTitle(title: String) {
+        supportActionBar?.title = title
     }
 
     private fun showBackButtonInActionBar() {

@@ -7,7 +7,8 @@ import ru.ventra.github.jobs.persistence.entity.Position
 
 class PositionsViewHolder(
     view: View,
-    private val binding: PositionsItemBinding
+    private val binding: PositionsItemBinding,
+    private val clickListener: OnPositionClickListener
 ) : BaseViewHolder(view) {
 
     private lateinit var position: Position
@@ -26,7 +27,7 @@ class PositionsViewHolder(
         }
     }
 
-    override fun onClick(view: View?) = Unit //clickListener.onCurrencyClick(currency)
+    override fun onClick(view: View?) = clickListener.onPositionClick(position)
 
-    override fun onLongClick(view: View?) = false //longClickListener.onCurrencyLongClick(currency)
+    override fun onLongClick(view: View?) = false //longClickListener.onPositionLongClick(position)
 }

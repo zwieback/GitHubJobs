@@ -4,4 +4,9 @@
     <!-- Navigation -->
     <string name="positions_fragment_label">Positions Fragment</string>
     <string name="position_detail_fragment_label">Position Detail Fragment</string>
+
+    <!-- Position Detail -->
+    <string name="position_detail_company_logo">Company Logo</string>
+    <string name="position_detail_how_to_apply">How to apply</string>
+    <string name="position_detail_type_location">%1s / %2s</string>
 </resources>

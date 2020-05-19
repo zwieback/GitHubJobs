@@ -25,6 +25,10 @@ android {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
+
+        buildConfigField "long", "NETWORK_CONNECT_TIMEOUT", '30'    // seconds
+        buildConfigField "long", "NETWORK_READ_TIMEOUT", '30'       // seconds
+        buildConfigField "String", "BASE_API_ENDPOINT", '"https://jobs.github.com/"'
     }
     buildTypes {
         debug {

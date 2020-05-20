@@ -1,10 +1,9 @@
 package ru.ventra.github.jobs.persistence.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import ru.ventra.github.jobs.persistence.entity.Position
+import ru.ventra.github.jobs.persistence.entity.PositionUpdate
+import ru.ventra.github.jobs.persistence.entity.toUpdate
 
 @Dao
 interface PositionDao {
@@ -18,11 +17,79 @@ interface PositionDao {
     @Query("SELECT * FROM t_position WHERE title LIKE '%' || :search || '%' OR description LIKE '%' || :search || '%' ORDER BY id")
     suspend fun searchByTitleOrDescription(search: String): List<Position>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveOne(position: Position)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertOne(position: Position): Long
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveAll(positions: List<Position>)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAll(positions: List<Position>): List<Long>
+
+    @Update
+    suspend fun updateOne(position: Position)
+
+    @Update
+    suspend fun updateAll(positions: List<Position>)
+
+    @Insert(entity = Position::class)
+    suspend fun updateOneWithoutFavoriteLoss(position: PositionUpdate)
+
+    @Update(entity = Position::class)
+    suspend fun updateAllWithoutFavoriteLoss(positions: List<PositionUpdate>)
+
+    /**
+     * Works like an [UPSERT](https://www.sqlite.org/draft/lang_UPSERT.html)
+     *
+     * [Copied from SO](https://stackoverflow.com/a/50736568)
+     */
+    @Transaction
+    suspend fun upsertOne(position: Position) {
+        val id = insertOne(position)
+        if (id == -1L) {
+            updateOne(position)
+        }
+    }
+
+    /**
+     * Works like an [UPSERT](https://www.sqlite.org/draft/lang_UPSERT.html)
+     *
+     * [Copied from SO](https://stackoverflow.com/a/50736568)
+     */
+    @Transaction
+    suspend fun upsertAll(positions: List<Position>) {
+        val insertResult = insertAll(positions)
+        val updateList = insertResult.mapIndexedNotNull { index, result ->
+            if (result == -1L) {
+                positions[index]
+            } else {
+                null
+            }
+        }
+        if (updateList.isNotEmpty()) {
+            updateAll(updateList)
+        }
+    }
+
+    @Transaction
+    suspend fun saveOne(position: Position) {
+        val id = insertOne(position)
+        if (id == -1L) {
+            updateOneWithoutFavoriteLoss(position.toUpdate())
+        }
+    }
+
+    @Transaction
+    suspend fun saveAll(positions: List<Position>) {
+        val insertResult = insertAll(positions)
+        val updateList = insertResult.mapIndexedNotNull { index, result ->
+            if (result == -1L) {
+                positions[index].toUpdate()
+            } else {
+                null
+            }
+        }
+        if (updateList.isNotEmpty()) {
+            updateAllWithoutFavoriteLoss(updateList)
+        }
+    }
 
     @Query("DELETE FROM t_position")
     suspend fun deleteAll()

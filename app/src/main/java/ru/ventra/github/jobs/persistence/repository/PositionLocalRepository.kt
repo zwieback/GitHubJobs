@@ -12,6 +12,8 @@ class PositionLocalRepository(private val dao: PositionDao) {
     suspend fun searchPositions(search: String): List<Position> =
         dao.searchByTitleOrDescription(search)
 
+    suspend fun updatePosition(position: Position) = dao.updateOne(position)
+
     suspend fun savePosition(position: Position) = dao.saveOne(position)
 
     suspend fun savePositions(positions: List<Position>) = dao.saveAll(positions)

@@ -31,7 +31,7 @@ class FavoriteViewModel : BaseViewModel<FavoriteUiState>() {
         position.favorite = !position.favorite
         viewModelScope.launch {
             try {
-                localRepository.savePosition(position)
+                localRepository.updatePosition(position)
             } catch (e: Exception) {
                 uiState.value = FavoriteUiState.Error("Failed to update data in the database")
             }

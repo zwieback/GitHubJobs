@@ -3,7 +3,7 @@
 Этот репозиторий содержит тестовое задание для компании [Ventra](https://ventra.ru).
 Реализован простой пример [GitHub Jobs](https://jobs.github.com/api).
 
-Задание:
+##  Задание
 
 ```
 Реализовать приложение Android на Kotlin, которое будет обращаться к API из списка https://github.com/public-apis/public-apis
@@ -20,3 +20,19 @@
 ```
 
 Реализован локальный поиск с помощью обычных LIKE-запросов.
+
+## Возможные проблемы
+
+Если сетевые запросы не будут работать, то нужно отключить использование `socketFactory` в `networkModule`:
+
+```kotlin
+single<OkHttpClient> {
+    OkHttpClient.Builder()
+//        .socketFactory(get<SocketFactory>())
+//        ... other methods
+        .build()
+}
+```
+
+Причина кроется в использовании `StrictMode.enableDefaults()` в классе `App`.
+[Исследование проблемы](https://github.com/square/okhttp/issues/3537)

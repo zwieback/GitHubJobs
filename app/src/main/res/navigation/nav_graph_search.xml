@@ -12,6 +12,26 @@
         android:label="@string/search_positions_fragment_label"
         tools:layout="@layout/search_fragment">
 
+        <action
+            android:id="@+id/action_positions_to_detail"
+            app:destination="@id/position_detail_screen"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/position_detail_screen"
+        android:name="ru.ventra.github.jobs.ui.position.detail.PositionDetailFragment"
+        android:label="@string/position_detail_fragment_label"
+        tools:layout="@layout/position_detail_fragment">
+
+        <argument
+            android:name="position_id"
+            app:argType="string" />
+
     </fragment>
 
 </navigation>

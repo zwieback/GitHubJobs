@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">GitHub Jobs</string>
 
+    <!-- Main Bottom Menu -->
+    <string name="main_bottom_menu_jobs">Jobs</string>
+    <string name="main_bottom_menu_search">Search</string>
+
     <!-- Navigation -->
     <string name="positions_fragment_label">Positions Fragment</string>
     <string name="position_detail_fragment_label">Position Detail Fragment</string>
+    <string name="search_positions_fragment_label">Search Positions Fragment</string>
 
     <!-- Position Detail -->
     <string name="position_detail_company_logo">Company Logo</string>

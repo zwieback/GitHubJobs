@@ -10,7 +10,6 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        eventListener
         if (context is OnFragmentEventListener) {
             eventListener = context
         } else {

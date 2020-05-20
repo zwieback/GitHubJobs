@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_graph_jobs"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="@string/main_bottom_menu_jobs" />
+    <item
+        android:id="@+id/nav_graph_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/main_bottom_menu_search" />
+</menu>

@@ -28,12 +28,12 @@ class PositionsViewModel : BaseViewModel<PositionsUiState>() {
             val positions = localRepository.getAllPositions()
             if (positions.isNotEmpty()) {
                 uiState.value = PositionsUiState.Success(positions)
+                return true
             }
         } catch (e: Exception) {
             uiState.value = PositionsUiState.Error("Failed to get data from the network")
-            return false
         }
-        return true
+        return false
     }
 
     private suspend fun loadFromNetwork() {

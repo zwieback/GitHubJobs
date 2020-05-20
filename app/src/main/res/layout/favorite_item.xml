@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_normal"
+        app:layout_constraintEnd_toStartOf="@+id/company"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@sample/positions.json/data/title" />
+
+    <TextView
+        android:id="@+id/company"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_normal"
+        app:layout_constraintEnd_toStartOf="@+id/favorite"
+        app:layout_constraintStart_toEndOf="@id/title"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@sample/positions.json/data/company" />
+
+    <ImageView
+        android:id="@+id/favorite"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_normal"
+        android:contentDescription="@string/favorite_position_description"
+        android:src="@android:drawable/btn_star_big_off"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/company"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,7 +48,11 @@ class MainActivity : AppCompatActivity(), OnFragmentEventListener {
      * Called on first creation and when restoring state.
      */
     private fun setupBottomNavigationBar() {
-        val navGraphIds = listOf(R.navigation.nav_graph_jobs, R.navigation.nav_graph_search)
+        val navGraphIds = listOf(
+            R.navigation.nav_graph_jobs,
+            R.navigation.nav_graph_search,
+            R.navigation.nav_graph_favorite
+        )
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = binding.bottomNav.setupWithNavController(

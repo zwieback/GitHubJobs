@@ -4,14 +4,19 @@
     <!-- Main Bottom Menu -->
     <string name="main_bottom_menu_jobs">Jobs</string>
     <string name="main_bottom_menu_search">Search</string>
+    <string name="main_bottom_menu_favorite">Favorite</string>
 
     <!-- Navigation -->
     <string name="positions_fragment_label">Positions Fragment</string>
     <string name="position_detail_fragment_label">Position Detail Fragment</string>
     <string name="search_positions_fragment_label">Search Positions Fragment</string>
+    <string name="favorite_positions_fragment_label">Favorite Positions Fragment</string>
 
     <!-- Position Detail -->
     <string name="position_detail_company_logo">Company Logo</string>
     <string name="position_detail_how_to_apply">How to apply</string>
     <string name="position_detail_type_location">%1s / %2s</string>
+
+    <!-- Favorite Positions -->
+    <string name="favorite_position_description">Favorite position (or not)</string>
 </resources>

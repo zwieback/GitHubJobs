@@ -8,4 +8,8 @@
         android:id="@+id/nav_graph_search"
         android:icon="@android:drawable/ic_menu_search"
         android:title="@string/main_bottom_menu_search" />
+    <item
+        android:id="@+id/nav_graph_favorite"
+        android:icon="@android:drawable/star_big_off"
+        android:title="@string/main_bottom_menu_favorite" />
 </menu>

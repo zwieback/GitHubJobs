@@ -12,7 +12,7 @@ import ru.ventra.github.jobs.persistence.entity.Position
     views = [
 //        PositionView::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {

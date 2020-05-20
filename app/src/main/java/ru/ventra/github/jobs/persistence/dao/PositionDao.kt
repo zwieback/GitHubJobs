@@ -12,7 +12,7 @@ interface PositionDao {
     @Query("SELECT * FROM t_position WHERE id = :id")
     suspend fun findById(id: String): Position?
 
-    @Query("SELECT * FROM t_position")
+    @Query("SELECT * FROM t_position ORDER BY id")
     suspend fun findAll(): List<Position>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

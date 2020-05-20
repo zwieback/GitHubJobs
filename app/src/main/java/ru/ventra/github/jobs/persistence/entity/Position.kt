@@ -29,5 +29,6 @@ data class Position(
     val howToApply: String,
     @SerializedName("created_at")
     @ColumnInfo(name = "created_at")
-    val createdAt: String
+    val createdAt: String,
+    var favorite: Boolean = false
 ) : Parcelable

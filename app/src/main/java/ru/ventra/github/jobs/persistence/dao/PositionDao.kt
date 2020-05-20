@@ -29,9 +29,15 @@ interface PositionDao {
     @Update
     suspend fun updateAll(positions: List<Position>)
 
+    /**
+     * [Get idea from here](https://stackoverflow.com/a/59834309)
+     */
     @Insert(entity = Position::class)
     suspend fun updateOneWithoutFavoriteLoss(position: PositionUpdate)
 
+    /**
+     * [Get idea from here](https://stackoverflow.com/a/59834309)
+     */
     @Update(entity = Position::class)
     suspend fun updateAllWithoutFavoriteLoss(positions: List<PositionUpdate>)
 

@@ -15,24 +15,24 @@ class SearchViewModel : BaseViewModel<SearchUiState>() {
     fun searchPositions(search: String) {
         uiState.value = SearchUiState.Loading
         viewModelScope.launch {
-//            if (!searchFromLocalCache()) {
+            if (!searchFromLocalCache(search)) {
                 searchFromNetwork(search)
-//            }
+            }
         }
     }
 
-//    private suspend fun searchFromLocalCache(): Boolean {
-//        try {
-//            val positions = localRepository.getAllPositions()
-//            if (positions.isNotEmpty()) {
-//                uiState.value = SearchUiState.Success(positions)
-//            }
-//        } catch (e: Exception) {
-//            uiState.value = SearchUiState.Error("Failed to get data from the network")
-//            return false
-//        }
-//        return true
-//    }
+    private suspend fun searchFromLocalCache(search: String): Boolean {
+        try {
+            val positions = localRepository.searchPositions(search)
+            if (positions.isNotEmpty()) {
+                uiState.value = SearchUiState.Success(positions)
+                return true
+            }
+        } catch (e: Exception) {
+            uiState.value = SearchUiState.Error("Failed to get data from the database")
+        }
+        return false
+    }
 
     private suspend fun searchFromNetwork(search: String) {
         try {

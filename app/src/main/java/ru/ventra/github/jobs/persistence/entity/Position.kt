@@ -3,12 +3,16 @@ package ru.ventra.github.jobs.persistence.entity
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity(tableName = "t_position")
+@Entity(
+    tableName = "t_position",
+    indices = [Index(value = ["title", "description"], name = "idx_title_description")]
+)
 data class Position(
     @PrimaryKey
     val id: String,

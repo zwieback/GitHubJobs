@@ -15,6 +15,9 @@ interface PositionDao {
     @Query("SELECT * FROM t_position ORDER BY id")
     suspend fun findAll(): List<Position>
 
+    @Query("SELECT * FROM t_position WHERE title LIKE '%' || :search || '%' OR description LIKE '%' || :search || '%' ORDER BY id")
+    suspend fun searchByTitleOrDescription(search: String): List<Position>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveOne(position: Position)
 

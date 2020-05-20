@@ -13,10 +13,10 @@ class PositionsAdapter(private val clickListener: OnPositionClickListener) : Bas
         addSection(arrayListOf<Position>())
     }
 
-    fun replacePositions(currencies: List<Position>) {
-        sections().first().run {
+    fun replacePositions(positions: List<Position>) {
+        sections().firstOrNull()?.run {
             clear()
-            addAll(currencies)
+            addAll(positions)
             notifyDataSetChanged()
         }
     }

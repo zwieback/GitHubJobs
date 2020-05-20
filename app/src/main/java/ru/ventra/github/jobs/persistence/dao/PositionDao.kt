@@ -32,7 +32,7 @@ interface PositionDao {
     /**
      * [Get idea from here](https://stackoverflow.com/a/59834309)
      */
-    @Insert(entity = Position::class)
+    @Update(entity = Position::class)
     suspend fun updateOneWithoutFavoriteLoss(position: PositionUpdate)
 
     /**
